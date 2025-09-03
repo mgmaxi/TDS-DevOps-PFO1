@@ -15,5 +15,37 @@
 			del control de versiones generando ramas ("branching"), mezclándolas
 			("merging") y generando y resolviendo conflictos en el flujo de trabajo.
 		</p>
+
+		<!-- Formulario de ingreso de datos -->
+		<form id="userForm">
+			<label for="username">Nombre de usuario:</label>
+			<input type="text" id="user_name" name="username" required placeholder="Ingrese su usuario">
+
+			<label for="password">Contraseña:</label>
+			<input type="password" id="password" name="password" required placeholder="********">
+
+			<button type="submit">Enviar</button>
+		</form>
+
+		<!-- Script para enviar los datos al backend -->
+		<script>
+			document.getElementById("userForm").addEventListener("submit", function(e){
+			e.preventDefault();
+
+			const data = {
+				username: document.getElementById("username").value,
+				password: document.getElementById("password").value
+			};
+
+			fetch("backend.php", {
+				method: "POST",
+				headers: {"Content-Type": "application/json"},
+				body: JSON.stringify(data)
+			})
+			.then(res => res.json())
+			.then(response => console.log("Respuesta backend:", response))
+			.catch(error => console.error("Error:", error));
+			});
+		</script>	
 	</body>
 </html>
