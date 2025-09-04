@@ -61,5 +61,80 @@
 						.catch(error => console.error('Error:', error));
 				});
 		</script>
+
+
+<!-- === BEGIN: User Profile (UI - Participant A) === -->
+<section id="user-profile" style="max-width:480px;margin:2rem auto;padding:1rem;border:1px solid #ddd;border-radius:8px;">
+  <h2>User Login</h2>
+  <form id="loginForm" autocomplete="off">
+    <div style="margin-bottom:0.75rem;">
+      <label for="username" style="display:block;margin-bottom:0.25rem;">Username</label>
+      <input id="username" name="username" type="text" required placeholder="Enter your username" style="width:100%;padding:0.5rem;">
+    </div>
+    <div style="margin-bottom:0.75rem;">
+      <label for="password" style="display:block;margin-bottom:0.25rem;">Password</label>
+      <input id="password" name="password" type="password" required placeholder="Enter your password" style="width:100%;padding:0.5rem;">
+    </div>
+    <button type="submit" style="padding:0.5rem 1rem;cursor:pointer;">Send</button>
+  </form>
+
+  <div id="result" style="margin-top:1rem;font-family:monospace;"></div>
+
+  <details style="margin-top:1rem;">
+    <summary>API Call (documentation)</summary>
+    <pre style="white-space:pre-wrap;">
+Method: POST
+URL: /api/perfil.php            <!-- Backend (B) will create this PHP -->
+Headers:
+  Content-Type: application/json
+Request body (JSON):
+  {
+    "username": "<string>",
+    "password": "<string>"
+  }
+Expected responses:
+  200 OK -> { "status": "ok" } or { "status": "error", "message": "<reason>" }
+    </pre>
+  </details>
+</section>
+
+<script>
+  // UI logic for sending the login data to backend (PHP)
+  const form = document.getElementById('loginForm');
+  const resultBox = document.getElementById('result');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const payload = {
+      username: document.getElementById('username').value.trim(),
+      password: document.getElementById('password').value
+    };
+
+    resultBox.textContent = 'Sending...';
+
+    try {
+      const res = await fetch('/api/perfil.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      // Attempt to parse JSON; if backend sends plain text, fall back to text
+      const text = await res.text();
+      let data;
+      try { data = JSON.parse(text); } catch { data = { raw: text }; }
+
+      if (res.ok) {
+        resultBox.textContent = 'Response: ' + JSON.stringify(data);
+      } else {
+        resultBox.textContent = 'Error ' + res.status + ': ' + JSON.stringify(data);
+      }
+    } catch (err) {
+      resultBox.textContent = 'Network error: ' + err.message;
+    }
+  });
+</script>
+<!-- === END: User Profile (UI - Participant A) === -->
+
 	</body>
 </html>
