@@ -68,14 +68,14 @@
         <section id="section-form" style="max-width:300px; margin:2rem auto; padding:1.5rem; border:1px solid #ccc; border-radius:5px;">
             <form id="form-user">
                 <label style="display:block; margin-bottom:0.30rem;"
-                    for="Username" >Usuario:</label>
+                    for="User">Usuario:</label>
                 <input style="display:block; width:96%; margin-bottom:1rem; padding:0.3rem;"
-                    type="text" id="Username" name="Username" required placeholder="Ingrese su usuario"
+                    type="text" id="User" name="User" required placeholder="Ingrese usuario"
                 />
                 <label style="display:block; margin-bottom:0.30rem;"
-                    for="Password" >Contraseña:</label>
+                    for="Password">Contraseña:</label>
                 <input style="display:block; width:96%; margin-bottom:1rem; padding:0.3rem;"
-                    type="password" id="Password" name="Password" required placeholder="Ingrese su contraseña"
+                    type="password" id="Password" name="Password" required placeholder="Ingrese contraseña"
                 />
                 <button type="submit">Enviar</button>
             </form>
@@ -86,7 +86,7 @@
             document.getElementById('form-user').addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                const username = document.getElementById('Username').value;
+                const username = document.getElementById('User').value;
                 const password = document.getElementById('Password').value;
 
                 fetch('backend.php', {
