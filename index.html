@@ -64,6 +64,56 @@
 		</script>
 
 
+        <!-- Formulario de ingreso de datos -->
+        <section id="section-form" style="max-width:300px; margin:2rem auto; padding:1.5rem; border:1px solid #ccc; border-radius:5px;">
+            <form id="form-user">
+                <label style="display:block; margin-bottom:0.30rem;"
+                    for="Username" >Usuario:</label>
+                <input style="display:block; width:96%; margin-bottom:1rem; padding:0.3rem;"
+                    type="text" id="Username" name="Username" required placeholder="Ingrese su usuario"
+                />
+                <label style="display:block; margin-bottom:0.30rem;"
+                    for="Password" >Contraseña:</label>
+                <input style="display:block; width:96%; margin-bottom:1rem; padding:0.3rem;"
+                    type="password" id="Password" name="Password" required placeholder="Ingrese su contraseña"
+                />
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+
+        <!-- Script para enviar los datos al backend -->
+        <script>
+            document.getElementById('form-user').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const username = document.getElementById('Username').value;
+                const password = document.getElementById('Password').value;
+
+                fetch('backend.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(username, password),
+                })
+                .then(function(response) {
+                    return response.json().then(function(result) {
+                        if (response.ok) {
+                            alert('Datos enviados correctamente');
+                        } else {
+                            alert('Error: ' + JSON.stringify(result.errors || result.message));
+                        }
+                    });
+                })
+                .catch(function(error) {
+                    alert('Ocurrió un error al enviar los datos.');
+                    console.error(error);
+                });
+            });
+        </script>
+		<!-- Fin del formulario de ingreso de datos -->
+
+
 <!-- === BEGIN: User Profile (UI - Participant A) === -->
 <section id="user-profile" style="max-width:480px;margin:2rem auto;padding:1rem;border:1px solid #ddd;border-radius:8px;">
   <h2>User Login</h2>
