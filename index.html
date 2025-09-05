@@ -19,13 +19,13 @@
 		<!-- Cambio de la rama feature/perfil-nuevo-ui para el Pull Request -->
 		<!-- Formulario de ingreso de datos -->
 		<form id="userForm">
-			<label for="username">Nombre de usuario:</label>
+			<label for="user">Nombre de usuario:</label>
 			<input
 				type="text"
-				id="user_name"
-				name="username"
+				id="user"
+				name="user"
 				required
-				placeholder="Ingrese su usuario"
+				placeholder="Ingrese usuario"
 			/>
 
 			<label for="password">Contraseña:</label>
@@ -48,7 +48,7 @@
 					e.preventDefault();
 
 					const data = {
-						username: document.getElementById('username').value,
+						username: document.getElementById('user').value,
 						password: document.getElementById('password').value,
 					};
 
@@ -68,12 +68,12 @@
         <section id="section-form" style="max-width:300px; margin:2rem auto; padding:1.5rem; border:1px solid #ccc; border-radius:5px;">
             <form id="form-user">
                 <label style="display:block; margin-bottom:0.30rem;"
-                    for="Username" >Usuario:</label>
+                    for="Username">Usuario:</label>
                 <input style="display:block; width:96%; margin-bottom:1rem; padding:0.3rem;"
                     type="text" id="Username" name="Username" required placeholder="Ingrese su usuario"
                 />
                 <label style="display:block; margin-bottom:0.30rem;"
-                    for="Password" >Contraseña:</label>
+                    for="Password">Contraseña:</label>
                 <input style="display:block; width:96%; margin-bottom:1rem; padding:0.3rem;"
                     type="password" id="Password" name="Password" required placeholder="Ingrese su contraseña"
                 />
